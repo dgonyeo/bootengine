@@ -10,5 +10,4 @@ install() {
     inst_multiple systemd-sysusers
     inst_simple "$moddir/ignition-sysusers.service" \
         "$systemdsystemunitdir/ignition-sysusers.service"
-    systemctl --root "$initdir" enable ignition-sysusers.service
 }
