@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -e
+
+tar cfv 30ignition.tar -C dracut 30ignition
