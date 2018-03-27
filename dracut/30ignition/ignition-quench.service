@@ -16,4 +16,4 @@ After=sysroot-boot.service
 Type=oneshot
 # We will only run if GRUB detected this file. Fail if we are unable to
 # remove it, rather than risking rerunning Ignition at next boot.
-ExecStart=/bin/rm /sysroot/boot/coreos/first_boot
+ExecStart=/usr/bin/sed -i '/linux16/s| ip=dhcp rd.neednet=1 coreos.first_boot||' /sysroot/boot/grub2/grub.cfg

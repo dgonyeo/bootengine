@@ -8,8 +8,8 @@ After=dev-disk-by\x2dlabel-EFI\x2dSYSTEM.device
 RequiresMountsFor=/sysroot
 
 # Creates mountpoint
-Requires=initrd-setup-root.service
-After=initrd-setup-root.service
+Requires=remount-sysroot.service
+After=remount-sysroot.service
 
 Conflicts=dracut-emergency.service emergency.service emergency.target
 Conflicts=initrd-switch-root.target umount.target

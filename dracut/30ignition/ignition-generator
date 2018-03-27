@@ -39,9 +39,9 @@ if $(cmdline_bool coreos.first_boot 0); then
     add_requires ignition-disks.service
     add_requires ignition-files.service
     # Only try to mount the ESP if GRUB detected a first_boot file
-    if [[ $(cmdline_arg coreos.first_boot) = "detected" ]]; then
-        add_requires ignition-quench.service
-    fi
+    #if [[ $(cmdline_arg coreos.first_boot) = "detected" ]]; then
+    #    add_requires ignition-quench.service
+    #fi
     if [[ $(cmdline_arg coreos.oem.id) == "packet" ]]; then
         add_requires coreos-static-network.service
     fi

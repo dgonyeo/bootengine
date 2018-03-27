@@ -26,6 +26,10 @@ install() {
         mkswap \
         sgdisk
 
+    dracut_install tr
+    inst_simple "$moddir/remount-sysroot.service" \
+        "$systemdutildir/system/remount-sysroot.service"
+
     #inst_script "$moddir/ignition-setup.sh" \
     #    "/usr/sbin/ignition-setup"
 
@@ -41,11 +45,14 @@ install() {
     inst_simple "$moddir/ignition-files.service" \
         "$systemdsystemunitdir/ignition-files.service"
 
+    inst_simple "$moddir/ignition-quench.ign" \
+        "/usr/lib/ignition/base.ign"
+
     #inst_simple "$moddir/ignition-quench.service" \
     #    "$systemdsystemunitdir/ignition-quench.service"
 
-    inst_simple "$moddir/sysroot-boot.service" \
-        "$systemdsystemunitdir/sysroot-boot.service"
+    #inst_simple "$moddir/sysroot-boot.service" \
+    #    "$systemdsystemunitdir/sysroot-boot.service"
 
     #inst_simple "$moddir/coreos-digitalocean-network.service" \
     #    "$systemdsystemunitdir/coreos-digitalocean-network.service"
