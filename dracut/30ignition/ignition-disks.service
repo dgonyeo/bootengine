@@ -2,21 +2,20 @@
 Description=Ignition (disks)
 DefaultDependencies=false
 
-Requires=local-fs-pre.target
-Before=local-fs-pre.target
+Requires=sysinit.target
+After=sysinit.target
 
-Requires=ignition-setup.service
-After=ignition-setup.service
+Requires=network.target
+After=network.target
 
-# setup networking
-Wants=systemd-networkd.service
-After=systemd-networkd.service
+#Requires=local-fs-pre.target
+#Before=local-fs-pre.target
 
-# generate resolv.conf
-Wants=systemd-resolved.service
-After=systemd-resolved.service
+Before=remount-sysroot.service
 
 [Service]
 Type=oneshot
 EnvironmentFile=/run/ignition.env
+#ExecStartPre=/usr/bin/sleep 20
+#ExecStartPre=/usr/sbin/dhclient
 ExecStart=/usr/bin/ignition --root=/sysroot --oem=${OEM_ID} --stage=disks

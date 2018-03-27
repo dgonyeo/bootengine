@@ -6,10 +6,14 @@ depends() {
     echo qemu systemd
 }
 
+installkernel() {
+    instmods \
+        =fs/btrfs
+}
+
 install() {
     inst_multiple \
         ignition \
-        coreos-metadata \
         useradd \
         usermod \
         groupadd \
@@ -19,10 +23,11 @@ install() {
         mkfs.ext4 \
         mkfs.xfs \
         mkfs.vfat \
-        mkswap
+        mkswap \
+        sgdisk
 
-    inst_script "$moddir/ignition-setup.sh" \
-        "/usr/sbin/ignition-setup"
+    #inst_script "$moddir/ignition-setup.sh" \
+    #    "/usr/sbin/ignition-setup"
 
     inst_script "$moddir/retry-umount.sh" \
         "/usr/sbin/retry-umount"
@@ -36,17 +41,17 @@ install() {
     inst_simple "$moddir/ignition-files.service" \
         "$systemdsystemunitdir/ignition-files.service"
 
-    inst_simple "$moddir/ignition-quench.service" \
-        "$systemdsystemunitdir/ignition-quench.service"
+    #inst_simple "$moddir/ignition-quench.service" \
+    #    "$systemdsystemunitdir/ignition-quench.service"
 
     inst_simple "$moddir/sysroot-boot.service" \
         "$systemdsystemunitdir/sysroot-boot.service"
 
-    inst_simple "$moddir/coreos-digitalocean-network.service" \
-        "$systemdsystemunitdir/coreos-digitalocean-network.service"
+    #inst_simple "$moddir/coreos-digitalocean-network.service" \
+    #    "$systemdsystemunitdir/coreos-digitalocean-network.service"
 
-    inst_simple "$moddir/coreos-static-network.service" \
-        "$systemdsystemunitdir/coreos-static-network.service"
+    #inst_simple "$moddir/coreos-static-network.service" \
+    #    "$systemdsystemunitdir/coreos-static-network.service"
 
     inst_rules \
         60-cdrom_id.rules

@@ -6,20 +6,11 @@ Before=initrd-parse-etc.service
 Requires=initrd-root-fs.target
 After=initrd-root-fs.target
 
-Requires=ignition-setup.service ignition-disks.service
-After=ignition-setup.service ignition-disks.service
+Requires=ignition-disks.service
+After=ignition-disks.service
 
-# setup the root filesystem before we try do things like create users on it.
-Requires=initrd-setup-root.service
-After=initrd-setup-root.service
-
-# setup networking
-Wants=systemd-networkd.service
-After=systemd-networkd.service
-
-# generate resolv.conf
-Wants=systemd-resolved.service
-After=systemd-resolved.service
+Wants=remount-sysroot.service
+After=remount-sysroot.service
 
 [Service]
 Type=oneshot
